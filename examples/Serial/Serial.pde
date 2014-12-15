@@ -3,6 +3,9 @@
 
 LIS3DSH accel;
 
+const int FS_RANGE = 2;
+const int TEMP_OFFSET = 25;
+
 void setup() 
 {
   Serial.begin(9600);
@@ -20,13 +23,14 @@ void loop()
 
   Serial.print("Accel ");
   Serial.print("X: ");
-  Serial.print(x);
+  Serial.print(x/pow(2,15) * FS_RANGE, DEC);
   Serial.print(" Y: ");
-  Serial.print(y);
+  Serial.print(y/pow(2,15) * FS_RANGE, DEC);
   Serial.print(" Z: ");
-  Serial.print(z);
+  Serial.print(z/pow(2,15) * FS_RANGE, DEC);
   Serial.print(" T: ");
-  Serial.println(temperature);
+  Serial.print(temperature + TEMP_OFFSET );
+  Serial.println("C");
 
   delay(100);
 }
